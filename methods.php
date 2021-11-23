@@ -1948,6 +1948,106 @@ function get_primary_factors($stern){
 
 
 //##############################################################################
-//get global factors
+//get global stern
 //#############################################################################
+
+function get_global_stern($symbol,$factor){
+	$score = 0;
+if($symbol == 'E'){
+	$score = (($factor['factor_A']*0.3)+ ($factor['factor_F']*0.3)+($factor['factor_H']*0.2)+4.2)-(($factor['factor_N']*0.3) + ($factor['factor_Q2']*0.3));	
+	return array('E',$score);
+	}
+else if($symbol == 'I'){
+	$score = (($factor['factor_E']*0.6) + ($factor['factor_H']*0.3) + ($factor['factor_L']*0.2) + ($factor['factor_Q1']*0.3)) - 4.1;
+	return array('I',$score); 
+	}
+else if($symbol == 'TM'){
+	$score = 14.6 - (($factor['factor_A']*0.2) + ($factor['factor_I']*0.5) + ($factor['factor_M']*0.3) + ($factor['factor_Q1']*0.5)); 
+	return array('TM',$score); 
+	}
+else if($symbol == 'SC'){
+	$score = (($factor['factor_G']*0.4) + ($factor['factor_Q3']*0.4) + 3.1) - (($factor['factor_F']*0.2) + ($factor['factor_M']*0.3)); 
+	return array('SC',$score); 
+	}
+else if($symbol == 'A'){
+	$score = (($factor['factor_L']*0.3) + ($factor['factor_O']*0.4) + ($factor['factor_Q4']*0.4) + 1.8 ) - ($factor['factor_C']*0.4); 
+	return array('A',$score); 
+	}
+}
+//##############################################################################
+//get global Factors
+//#############################################################################
+function get_global_factor($factor){
+	if($factor[0] == 'E'){
+		if($factor[1]<4){
+			return 'Introverted';
+		}
+		else if($factor[1]>7){
+			return'Extraverted';
+		}
+		else{
+			return 'Average';
+		}
+					
+	}
+	else if($factor[0] == 'I'){
+		if($factor[1] < 4 ){
+			return 'Accommodating';
+		}
+		else if($factor[1] > 7){
+			return 'Independent';
+		}
+		else{
+			return 'Average';
+			}
+		}
+	
+	else if($factor[0] == 'TM'){
+		if($factor[1] < 4 ){
+			return 'Receptive';
+		}
+		else if($factor[1] > 7 ){
+			return 'Tough-Minded';
+		}
+		else{
+			return 'Average';
+			}
+		}
+	
+	else if($factor[0] == 'SC'){
+		if($factor[1] < 4){
+			return 'Unrestrained';
+		}
+		else if($factor[1] > 7){
+			return 'Self-Controlled';
+		}
+		else{
+			return 'Average';
+			}
+		}
+	
+	else if($factor[0] == 'A'){
+		if($factor[1] < 4){
+			return 'Low Anxiety';
+		}
+		else if($factor[1] > 7){
+			return 'High Anxiety';
+		}
+		else{
+			return 'Average';
+			}
+		}
+	
+}
 ?>
+
+
+
+
+
+
+
+
+
+
+

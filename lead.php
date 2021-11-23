@@ -4,7 +4,7 @@ $conn = mysqli_connect("localhost","root","","epzgloba_jobportal");
 $conn = mysqli_connect("localhost","root","","epzgloba_jobportal");
 if(1){
 
-$responses_sql ="SELECT * FROM `nontimed_answers` WHERE `cand_id`=841 and `test_typ`= 22 ORDER BY `ques_no` ASC";
+$responses_sql ="SELECT * FROM `nontimed_answers` WHERE `cand_id`=1415 and `test_typ`= 22 ORDER BY `ques_no` ASC";
 
 $responsesResult = mysqli_query($conn,$responses_sql);
 $resp = array();
@@ -31,11 +31,15 @@ $factor_Q3 = array('26A'=>$resp['26A'],'29A'=>$resp['29A'],'57A'=>$resp['57A'],'
 $factor_Q4 = array('28A'=>$resp['28A'],'30A'=>$resp['30A'],'60A'=>$resp['60A'],'62A'=>$resp['62A'],'91A'=>$resp['91A'],'94A'=>$resp['94A'],'124A'=>$resp['124A'],'126A'=>$resp['126A'],'155A'=>$resp['155A'],'158A'=>$resp['158A']);
 $factor_IM = array('16A'=>$resp['16A'],'23A'=>$resp['23A'],'34A'=>$resp['34A'],'48A'=>$resp['48A'],'58A'=>$resp['58A'],'75A'=>$resp['75A'],'85A'=>$resp['85A'],'95A'=>$resp['95A'],'101A'=>$resp['101A'],'115A'=>$resp['115A'],'144A'=>$resp['144A'],'153A'=>$resp['153A']);
 //##############################################################################
-//foreach($factor_B as $x => $x_value) {
-//  echo "Key=" . $x . ", Value=" . $x_value;
-//  echo "<br>";
-//}
-//echo 'count: '.count($factor_IM).'<br>';
+
+//global factors 
+$extraversion = array('factor_A'=> get_stern('A', get_score_A($factor_A))[1],'factor_F'=> get_stern('F', get_score_F($factor_F))[1],'factor_H'=> get_stern('H', get_score_H($factor_H))[1],'factor_N'=> get_stern('N', get_score_N($factor_N))[1], 'factor_Q2'=> get_stern('Q2', get_score_Q2($factor_Q2))[1] );
+$independence = array('factor_E'=> get_stern('E', get_score_E($factor_E))[1],'factor_H'=> get_stern('H', get_score_H($factor_H))[1],'factor_L'=> get_stern('L', get_score_L($factor_L))[1],'factor_Q1'=> get_stern('Q1', get_score_Q1($factor_Q1))[1] );
+$anxiety = array('factor_C'=> get_stern('C', get_score_C($factor_C))[1],'factor_L'=> get_stern('L', get_score_L($factor_L))[1],'factor_O'=> get_stern('O', get_score_O($factor_O))[1],'factor_Q4'=> get_stern('Q4', get_score_Q4($factor_Q4))[1] );
+$tough_mindedness = array('factor_A'=> get_stern('A', get_score_A($factor_A))[1],'factor_I'=> get_stern('I', get_score_I($factor_I))[1],'factor_M'=> get_stern('M', get_score_M($factor_M))[1],'factor_Q1'=> get_stern('Q1', get_score_Q1($factor_Q1))[1] );
+$self_control = array('factor_G'=>get_stern('G', get_score_G($factor_G))[1],'factor_F'=> get_stern('F', get_score_F($factor_F))[1],'factor_M'=> get_stern('M', get_score_M($factor_M))[1],'factor_Q3'=> get_stern('Q3', get_score_Q3($factor_Q3))[1] );
+//##############################################################################
+
 
 echo 'Factor A: '.get_primary_factors(get_stern('A', get_score_A($factor_A))).'<br>';
 echo 'stern A:'.get_stern('A', get_score_A($factor_A))[1].'<br>';
@@ -122,5 +126,27 @@ echo'----------------------<br>';
 echo 'score IM:'.get_score_IM($factor_IM).'<br>';
 echo'----------------------<br>';
 
+echo '<h3>GLOBAL FACTORS</h3>';
+echo 'Extrversion Factor:'.get_global_factor(get_global_stern('E',$extraversion)).'<br>';
+echo 'Extrversion stern :'.get_global_stern('E',$extraversion)[1].'<br>';
+echo'----------------------<br>';
+
+echo 'Independence Factor:'.get_global_factor(get_global_stern('I',$independence)).'<br>';
+echo 'Independence stern :'.get_global_stern('I',$independence)[1].'<br>';
+echo'----------------------<br>';
+
+echo 'Tough-Mindedness Factor:'.get_global_factor(get_global_stern('TM',$tough_mindedness)).'<br>';
+echo 'Tough-Mindedness stern :'.get_global_stern('TM',$tough_mindedness)[1].'<br>';
+echo'----------------------<br>';
+
+echo 'Self-Control Factor:'.get_global_factor(get_global_stern('SC',$self_control)).'<br>';
+echo 'Self-Control stern :'.get_global_stern('SC',$self_control)[1].'<br>';
+echo'----------------------<br>';
+
+echo 'Anxiety Factor:'.get_global_factor(get_global_stern('A',$anxiety)).'<br>';
+echo 'Anxiety stern :'.get_global_stern('A',$anxiety)[1].'<br>';
+echo'----------------------<br>';
+
 }
 ?>
+
